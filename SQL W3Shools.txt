@@ -1,0 +1,63 @@
+Access Link : https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
+1.	Display all customer information (Customers) located in the city of 'London' *or* the country 'Germany' *and* have a contact name (ContactName) that starts with the letter 'M'. SELECT *
+•	FROM Customers
+•	WHERE (City = 'London' OR Country = 'Germany')
+•	AND ContactName LIKE 'M%';
+2.	Display all products that have a price greater than 30, along with the Supplier's name, and sort them from the highest price.
+•	SELECT p.ProductName, s.SupplierName, p.Price FROM Products p
+•	inner join Suppliers s
+•	on p.SupplierID = s.SupplierID
+•	where price > 30
+•	order by Price desc;
+3.	Count the number of customers from each country, and display the results in descending order based on the number of customers.
+•	SELECT Country, count(Country) as CustomerCountry
+•	FROM Customers
+•	group by Country
+•	order by Country desc;
+4.	Display the names of customers (Customers) and the names of products (Products) purchased, for customers from the country 'France', and sort by the highest Quantity.
+•	SELECT c.CustomerName, c.Country, o.OrderDate, od.Quantity
+•	fROM ((Customers c
+•	inner join Orders o on c.CustomerID = o.CustomerID)
+•	inner join OrderDetails od on o.OrderID = od.OrderID)
+•	inner join Products p on od.ProductID = p.ProductID
+•	where c.Country = 'France'
+•	order by 4 desc
+5.	Display 5 customers with contact names sorted alphabetically and from the country 'USA'.
+•	SELECT top 5 CustomerName, ContactName, Country FROM Customers
+where Country = 'USA'
+order by ContactName asc
+6.	Display all products (Products) that are priced over 20 and have stock less than 100 or are supplied by "Tokyo Traders," and sorted by SupplierName.
+•	SELECT distinct cu.CustomerName, p.ProductName, p.Price, od.Quantity, su.SupplierName 
+•	FROM ((((Products p 
+•	inner join OrderDetails od on p.ProductID = od.ProductID)
+•	inner join Suppliers su on su.SupplierID = p.SupplierID)
+•	inner join Orders o on od.OrderID = o.OrderID)
+•	inner join Customers cu on o.CustomerID = cu.CustomerID)
+•	where price > 20 and Quantity < 100 and SupplierName = 'Tokyo Traders'
+•	order by 5;
+7.	Display the total number of orders for each customer who has more than 5 orders, and sort the results by the number of orders.SELECT distinct c.CustomerName, ord.Quantity
+•	FROM ((Customers c
+•	INNER JOIN Orders o ON c.CustomerID = o.CustomerID)
+•	INNER JOIN OrderDetails ord ON o.OrderID = ord.OrderID)
+•	where Quantity > 5
+•	order by 2;
+8.	Display the average product price (Products) sold by each supplier (Suppliers), sorted by supplier name.
+•	SELECT pr.ProductName, su.SupplierName, avg(pr.Price) as mean 
+•	FROM Products pr
+•	inner join Suppliers su on pr.SupplierID = su.SupplierID
+•	group by pr.ProductName, su.SupplierName
+•	order by 3 desc;
+9.	Display the names of customers and products with the lowest prices they have ever ordered.
+•	SELECT distinct cu.CustomerName, pr.ProductName, ord.OrderDate, od.Quantity
+•	FROM (((Customers cu 
+•	INNER JOIN Orders ord ON cu.CustomerID = ord.CustomerID) 
+•	INNER JOIN OrderDetails od ON ord.OrderID = od.OrderID)
+•	inner join Products pr on pr.ProductID = od.ProductID)
+•	order by 2;
+10.	Display the product names and Supplier names from the Products and Suppliers tables, then calculate the total product prices for each SupplierName by each Supplier. Sort the results by Supplier names.
+•	SELECT p.ProductName, s.SupplierName, sum(p.Price) as TotalPrice
+•	FROM Products p
+•	inner join Suppliers s on p.SupplierID = s.SupplierID
+•	group by p.ProductName, s.SupplierName
+•	order by 2;
+
