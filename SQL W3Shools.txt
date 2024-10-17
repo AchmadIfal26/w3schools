@@ -1,6 +1,6 @@
 Access Link : https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
-1.	Display all customer information (Customers) located in the city of 'London' *or* the country 'Germany' *and* have a contact name (ContactName) that starts with the letter 'M'. SELECT *
-•	FROM Customers
+1.	Display all customer information (Customers) located in the city of 'London' *or* the country 'Germany' *and* have a contact name (ContactName) that starts with the letter 'M'. 
+•	SELECT * FROM Customers
 •	WHERE (City = 'London' OR Country = 'Germany')
 •	AND ContactName LIKE 'M%';
 2.	Display all products that have a price greater than 30, along with the Supplier's name, and sort them from the highest price.
